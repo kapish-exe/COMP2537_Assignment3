@@ -6,12 +6,7 @@ let pokemons = []
 
 function updatePaginationDiv(currentPage, numPages) {
 
-  // if(currentPage < 1){
-  //   currentPage = 1;
-  // }
-  // if(currentPage > numPages){
-  //   currentPage = numPages;
-  // }
+
 
   $('#pagination').empty()
   var startPage = Math.max(1, currentPage - Math.floor(5 / 2))
@@ -65,7 +60,6 @@ function updatePaginationDiv(currentPage, numPages) {
   }
 
   const setup = async () => {
-    // test out poke api using axios here
 
 
     $('#pokeCards').empty()
@@ -94,9 +88,7 @@ function updatePaginationDiv(currentPage, numPages) {
           </div>
         `);
       });
-      // for(i = 0; i <types.length; i++){
 
-      // }
     }
     categories();
 
@@ -113,16 +105,10 @@ function numberPokemon() {
 };numberPokemon()
 
 
-    // pop up modal when clicking on a pokemon card
-    // add event listener to each pokemon card
     $('body').on('click', '.pokeCard', async function (e) {
       const pokemonName = $(this).attr('pokeName')
-      // numberPokemon()
-      // console.log("pokemonName: ", pokemonName);
       const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-      // console.log("res.data: ", res.data);
       const types = res.data.types.map((type) => type.type.name)
-      // console.log("types: ", types);
       $('.modal-body').html(`
         <div style="width:200px">
         <img src="${res.data.sprites.other['official-artwork'].front_default}" alt="${res.data.name}"/>
@@ -154,13 +140,11 @@ function numberPokemon() {
         `)
     })
 
-    // add event listener to pagination buttons
     $('body').on('click', ".numberedButtons", async function (e) {
       currentPage = Number(e.target.value)
       paginate(currentPage, PAGE_SIZE, pokemons)
       numberPokemon()
 
-      //update pagination buttons
       updatePaginationDiv(currentPage, numPages)
     })
 
